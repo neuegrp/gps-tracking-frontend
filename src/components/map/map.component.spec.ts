@@ -1,0 +1,5 @@
+describe('mapComponent', () => {
+    beforeEach(async () => {
+
+    });
+});

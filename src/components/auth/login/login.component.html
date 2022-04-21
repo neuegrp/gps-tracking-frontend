@@ -1,0 +1,59 @@
+<div class="login">
+    <div class="login__container container">
+        <div class="container__header--wrapper">
+            <h2 class="container__header">
+                {{'LOGIN' | translate}}
+            </h2>
+        </div>
+        <div class="container__content content">
+            <form class="content__form form" [formGroup]="loginFormGroup">
+                <mat-form-field class="form__item">
+                    <input
+                        required
+                        matInput
+                        placeholder="{{'EMAIL' | translate}}"
+                        formControlName="email"
+                    >
+                    <mat-error *ngIf="loginFormGroup.hasError('email', 'email')">
+                        {{ 'EMAIL_ERROR' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="loginFormGroup.hasError('required', 'email')">
+                        {{ 'REQUIRED_ERROR' | translate }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form__item">
+                    <input
+                        required
+                        matInput
+                        placeholder="{{'PASSWORD' | translate}}"
+                        formControlName="password"
+                        type="password"
+                    >
+                    <mat-error *ngIf="loginFormGroup.hasError('required', 'password')">
+                        {{ 'REQUIRED_ERROR' | translate }}
+                    </mat-error>
+                </mat-form-field>
+                <button
+                    *ngIf="isLoginRequestCompleted; else spinner"
+                    (click)="loginHandle()"
+                    mat-stroked-button
+                    color="primary"
+                    class="form__button"
+                    [disabled]="!loginFormGroup.valid"
+                >
+                    {{'LOGIN' | translate}}
+                </button>
+
+<!--                <a class="form__registration-text">{{'DONT_HAVE_AN_ACCOUNT_YET?' | translate}}-->
+<!--                    <span class="form__registration-link" (click)="goToRegistrationPage()">{{'SING_UP' | translate}}</span>-->
+<!--                </a>-->
+<!--                <a class="form__registration-text">{{'FORGOT_YOUR_PASSWORD?' | translate}}-->
+<!--                    <span class="form__registration-link" (click)="openResetPasswordDialog()">{{'RESET_PASSWORD' | translate}}</span>-->
+<!--                </a>-->
+                <ng-template #spinner>
+                    <app-progress-spinner></app-progress-spinner>
+                </ng-template>
+            </form>
+        </div>
+    </div>
+</div>

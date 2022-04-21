@@ -1,0 +1,61 @@
+@import 'abstracts/constants';
+
+.registration {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: $margin-main $margin-side;
+    .container {
+      &__header {
+        &--wrapper { }
+        font-weight: 500;
+        text-align: center;
+      }
+      &__content {
+        .content {
+          &__form {
+            display: flex;
+            flex-direction: column;
+            min-width: $dialog-width;
+            .form {
+              &__item {
+
+              }
+              &__button {
+                margin-top: $margin-side;
+              }
+              &__checkbox {
+                margin: 5px 0;
+              }
+              &__document-links {
+                display: flex;
+                flex-wrap: wrap;
+                .documents {
+                  &__item {
+                    cursor: pointer;
+                    color: $primary-color;
+                    margin: 5px !important;
+                  }
+                }
+              }
+              &__login-text {
+                margin-top: $margin-side !important;
+              }
+              &__login-link {
+                cursor: pointer;
+                color: $primary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ::ng-deep .mat-checkbox-layout {
+    white-space: normal !important;
+  }
+}

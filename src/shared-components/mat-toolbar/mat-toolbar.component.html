@@ -1,0 +1,23 @@
+<mat-toolbar class="toolbar">
+    <div class="toolbar__section left-section">
+        <img class="left-section__img" src="assets/images/logo.png" alt="Logo">
+    </div>
+    <div class="toolbar__section right-section">
+        <app-language-switching class="right-section__lang"></app-language-switching>
+        <div class="right-section__auth" *ngIf="isUserAuth(); else Auth">
+            <button (click)="logout()" class="right-section__bth" mat-button>
+                <span>{{'LOGOUT' | translate}}</span>
+            </button>
+        </div>
+        <ng-template #Auth>
+            <div class="right-section__auth">
+<!--                <button (click)="goToLoginPage()" class="right-section__bth" mat-button>-->
+<!--                    <span>{{'LOG_IN' | translate}}</span>-->
+<!--                </button>-->
+<!--                <button (click)="goToRegistrationPage()" class="auth__bth" mat-button>-->
+<!--                    <span>{{'SING_UP' | translate}}</span>-->
+<!--                </button>-->
+            </div>
+        </ng-template>
+    </div>
+</mat-toolbar>

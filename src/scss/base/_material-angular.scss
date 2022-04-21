@@ -1,0 +1,192 @@
+@use '@angular/material' as mat;
+@include mat.core();
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+
+/**
+* Generated theme by Material Theme Generator
+* https://materialtheme.arcsine.dev
+*/
+$typography-config: mat.define-typography-config(
+        $display-4: mat.define-typography-level(112px, 112px, 300, $font-name, -0.0134em),
+        $display-3: mat.define-typography-level(56px, 56px, 400, $font-name, -0.0089em),
+        $display-2: mat.define-typography-level(45px, 48px, 400, $font-name, 0.0000em),
+        $display-1: mat.define-typography-level(34px, 40px, 400, $font-name, 0.0074em),
+        $headline: mat.define-typography-level(24px, 32px, 400, $font-name, 0.0000em),
+        $title: mat.define-typography-level(20px, 32px, 500, $font-name, 0.0075em),
+        $subheading-2: mat.define-typography-level(14px, 20px, 400, $font-name, 0.0094em),
+        $subheading-1: mat.define-typography-level(14px, 20px, 500, $font-name, 0.0067em),
+        $body-2: mat.define-typography-level(14px, 20px, 500, $font-name, 0.0179em),
+        $body-1: mat.define-typography-level(14px, 20px, 400, $font-name, 0.0179em),
+        $button: mat.define-typography-level(14px, 14px, 500, $font-name, 0.0893em),
+        $caption: mat.define-typography-level(14px, 14px, 400, $font-name, 0.0333em),
+        $input: mat.define-typography-level(14px, 1.125, 400, $font-name, 1.5px)
+);
+@include mat.core($typography-config);
+
+// Theme Config
+body {
+  --primary-color: $primary-color;
+  --primary-lighter-color:$primary-lighter-color;
+  --primary-darker-color: $primary-darker-color;
+  --text-primary-color: #{$dark-text};
+  --text-primary-lighter-color: #{$dark-text-lighter};
+  --text-primary-darker-color: #{$dark-text-lighter};
+}
+
+$mat-primary: (
+        main: $primary-color,
+        lighter:$primary-lighter-color,
+        darker: $primary-darker-color,
+        200: $primary-color, // For slide toggle,
+        contrast : (
+                main: $dark-text,
+                lighter: $dark-text-lighter,
+                darker: $dark-text-darker,
+        )
+);
+$theme-primary: mat.define-palette($mat-primary, main, lighter, darker);
+
+body {
+  --accent-color: $accent-color;
+  --accent-lighter-color: $accent-lighter-color;
+  --accent-darker-color: $accent-darker-color;
+  --text-accent-color: #{$dark-text};
+  --text-accent-lighter-color: #{$dark-text-lighter};
+  --text-accent-darker-color: #{$dark-text-darker};
+}
+
+$mat-accent: (
+        main: $accent-color,
+        lighter: $accent-lighter-color,
+        darker: $accent-darker-color,
+        200: $accent-color, // For slide toggle,
+        contrast : (
+                main: $dark-text,
+                lighter: $dark-text-lighter,
+                darker: $dark-text-darker,
+        )
+);
+$theme-accent: mat.define-palette($mat-accent, main, lighter, darker);
+
+body {
+  --warn-color: $error-color;
+  --warn-lighter-color: $error-lighter-color;
+  --warn-darker-color: $error-darker-color;
+  --text-warn-color: #{$dark-text};
+  --text-warn-lighter-color: #{$dark-text-lighter};
+  --text-warn-darker-color: #{$dark-text-darker};
+}
+
+$mat-warn: (
+        main: $error-color,
+        lighter: $error-lighter-color,
+        darker: $error-darker-color,
+        200: $error-color, // For slide toggle,
+        contrast : (
+                main: $dark-text,
+                lighter: $dark-text-lighter,
+                darker: $dark-text-darker,
+        )
+);
+$theme-warn: mat.define-palette($mat-warn, main, lighter, darker);;
+
+$theme: mat.define-light-theme($theme-primary, $theme-accent, $theme-warn);
+
+// Theme Init
+@include mat.all-component-themes($theme);
+
+// Handle buttons appropriately, with respect to line-height
+.mat-raised-button, .mat-stroked-button, .mat-flat-button {
+  padding: 0 1.15em;
+  margin: 0 .65em;
+  min-width: 3em;
+  line-height: 36.4px
+}
+.mat-standard-chip {
+  padding: .5em .85em;
+  min-height: 2.5em;
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  .mat-badge-content {
+    font-family: $font-name;
+  }
+}
+.mat-drawer, .mat-drawer-container {
+  background-color: $background-color;
+}
+.mat-drawer-side {
+  border: none;
+}
+.mat-form-field-underline {
+  bottom: 0;
+}
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+.mat-row, .mat-header-row, .mat-footer-row {
+  border-color: $border-color;
+}
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: $border-color;
+}
+.mat-select-value {
+  color: $dark-text
+}
+.mat-select {
+  width: auto !important;
+}
+.mat-icon {
+  color: $dark-text-lighter;
+  &:hover {
+    color: $primary-color;
+  }
+}
+.mat-row, .mat-header-row {
+  min-width: $container-middle-width;
+}
+.mat-table {
+  overflow-x: auto;
+  width: 100%;
+  @media screen and (max-width: $mobile-size-screen) {
+    width: auto;
+  }
+}
+.mat-cell, .mat-header-cell {
+  padding: $margin-content;
+  width: 100%;
+  font-family: $font-name;
+  @media screen and (max-width: $mobile-size-screen) {
+    padding: 0 !important;
+  }
+}
+@media screen and (max-width: $mobile-size-screen) {
+  .mat-row, .mat-header-row {
+    min-width: 0;
+  }
+  .mat-header-row {
+    display: none;
+  }
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+    &:after {
+      display: none;
+    }
+  }
+}
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background: $accent-color;
+}

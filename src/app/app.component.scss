@@ -1,0 +1,18 @@
+@import 'abstracts/constants';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  min-height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  &__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

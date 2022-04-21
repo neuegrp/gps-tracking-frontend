@@ -1,0 +1,34 @@
+@import 'abstracts/constants';
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  background-color: $background-color;
+  &__title {
+    margin-left: $margin-content;
+    cursor: pointer;
+  }
+  &__section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    .left-section {
+      &__img {
+        width: 75px;
+      }
+    }
+    .right-section {
+      &__auth {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      &__lang {
+        margin-right: $margin-content;
+      }
+    }
+  }
+}

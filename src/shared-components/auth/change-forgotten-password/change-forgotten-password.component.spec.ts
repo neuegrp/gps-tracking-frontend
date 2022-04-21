@@ -1,0 +1,5 @@
+describe('changeForgottenPass', () => {
+    beforeEach(async () => {
+
+    });
+});
