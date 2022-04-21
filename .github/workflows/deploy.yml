@@ -1,0 +1,84 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build:ci
+      - name: Test
+        run: npm run test:ci
+      - name: Archive build
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: deploy_dist
+          path: dist
+      - name: Archive code coverage result
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: deploy_coverage
+          path: coverage
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Download build
+        uses: actions/download-artifact@v1
+        with:
+          name: deploy_dist
+      - name: Compress and Copy New Files to server
+        run : |
+            cd deploy_dist/
+            tar -czvf ../../crm.tar.gz ./
+            cd ../../
+            
+      - name: Compress New Files
+        run: |
+          mkdir ../build
+          cp -TR . ../build
+          tar -cvf deploy.tar ../build/deploy_dist
+            
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
+          key: ${{secrets.SSH_KEY}} # Private or public key of the server
+          username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
+          source: "deploy.tar"
+          target: "/home/sites/www/gps-tracking"
+          
+      - name: Connect to server and run project
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
+          key: ${{secrets.SSH_KEY}} # Private or public key of the server
+          username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
+          
+          script: |
+            cd /home/sites/www/gps-tracking/
+            test -f dist_old.zip && rm dist_old.zip
+            zip -r dist_old.zip dist
+            tar -xf deploy.tar
+            rm deploy.tar
+            rm -r dist/gps-tracking/
+            mv build/deploy_dist/gps-tracking dist/
+            rm -r build
+            pm2 restart all
