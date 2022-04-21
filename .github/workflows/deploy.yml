@@ -81,4 +81,3 @@ jobs:
             rm -r dist/gps-tracking/
             mv build/deploy_dist/gps-tracking dist/
             rm -r build
-            pm2 restart all
